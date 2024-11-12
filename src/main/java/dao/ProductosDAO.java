@@ -78,6 +78,7 @@ public class ProductosDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        System.out.println("Prueba para git");
     }
     return productos;
 }  
