@@ -137,9 +137,21 @@ public class InternalRegistrarVenta extends javax.swing.JInternalFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Ingresar Nombre de Cliente:");
 
+        txtCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtClienteActionPerformed(evt);
+            }
+        });
+
         comboBoxProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboBoxProductoActionPerformed(evt);
+            }
+        });
+
+        comboBoxVendedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxVendedorActionPerformed(evt);
             }
         });
 
@@ -265,15 +277,11 @@ public class InternalRegistrarVenta extends javax.swing.JInternalFrame {
         Connection con = conexionController.conectar();
         ProductosDAO productodao = new ProductosDAO(con);
         List<ProductoEntity> listaProductos = productodao.obtenerProductos();
-        System.out.println("Aqui estoy");
-        try{
-            for (ProductoEntity producto : listaProductos) {
-            System.out.println("Producto encontrado con id: " + producto.getId());
-            int id = producto.getId();
-            comboBoxProducto.addItem(String.valueOf(id)); 
-        }
-        }catch(Exception e){
-            System.out.println("e");
+        System.out.println("Lista de productos: "+listaProductos);
+        for (ProductoEntity producto : listaProductos) {
+            System.out.println("Descripcion de producto: " + producto.getDescripcion());
+            String descripcion = producto.getDescripcion();
+            comboBoxProducto.addItem(""+descripcion); 
         }
         
          if (con != null) {
@@ -410,6 +418,14 @@ public class InternalRegistrarVenta extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         rellenarTabla();
     }//GEN-LAST:event_btnListadonormalActionPerformed
+
+    private void txtClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtClienteActionPerformed
+
+    private void comboBoxVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxVendedorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboBoxVendedorActionPerformed
          
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnListadonormal;
