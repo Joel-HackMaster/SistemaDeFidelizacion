@@ -152,7 +152,7 @@ public class ProductosDAO {
     ResultSet rs = null;
 
     try {
-        String sql = "SELECT descripcion, detalle, precio, stock FROM tt_producto WHERE id = ?";
+        String sql = "SELECT descripcion, detalle, precio, puntosxconv stock FROM tt_producto WHERE id = ?";
         ps = con.prepareStatement(sql);
         ps.setInt(1, id);
         rs = ps.executeQuery();
@@ -162,9 +162,8 @@ public class ProductosDAO {
             String detalle = rs.getString("detalle");
             float precio = rs.getFloat("precio");
             int stock = rs.getInt("stock");
-           
-
-            producto = new ProductoEntity(descripcion, detalle, precio, stock);
+            int puntos = rs.getInt("puntosxconv");
+            producto = new ProductoEntity(descripcion, detalle, precio, stock, puntos);
         }
     } catch (SQLException e) {
         e.printStackTrace();
