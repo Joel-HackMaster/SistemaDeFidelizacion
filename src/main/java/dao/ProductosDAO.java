@@ -58,14 +58,15 @@ public class ProductosDAO {
         ResultSet rs = null;
     
     try {
-        String sql = "SELECT id, precio FROM tt_producto";  
+        String sql = "SELECT id, descripcion, precio FROM tt_producto ORDER BY id";  
         ps = connection.prepareStatement(sql);
         rs = ps.executeQuery();
         
         while (rs.next()) {
             int id = rs.getInt("id");
+            String descripcion = rs.getString("descripcion");
             float precio = rs.getFloat("precio");        
-            ProductoEntity producto = new ProductoEntity(id, precio);
+            ProductoEntity producto = new ProductoEntity(id, descripcion, precio);
             
             productos.add(producto);
         }

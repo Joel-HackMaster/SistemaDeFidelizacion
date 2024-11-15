@@ -15,6 +15,7 @@ Vistas\RegistroVendedor.class
 Vistas\InternalRegistrarVenta$3.class
 modelos\VendedorEntity.class
 Vistas\DashboardAdmin$1.class
+Vistas\InternalRegistrarVenta$7.class
 Vistas\InternalVendedor$5.class
 modelos\VentaEntity.class
 Vistas\RegistroVendedor$1.class
@@ -42,6 +43,7 @@ Vistas\DashboardAdmin$2.class
 dao\VendedorDAO.class
 Vistas\RegistroVendedor$2.class
 Vistas\InternalVendedor$4.class
+Vistas\InternalRegistrarVenta$8.class
 dao\ProductosDAO.class
 Vistas\InternalRegistrarVenta$2.class
 modelos\DetalleAcumulacionEntity.class

@@ -17,8 +17,9 @@ public class ProductoEntity {
     Integer puntosxconv;
     Integer puntosxvent;
 
-    public ProductoEntity(Integer id, float precio) {
+    public ProductoEntity(Integer id, String descripcion,float precio) {
         this.id = id;
+        this.descripcion = descripcion;
         this.precio = precio;
     }
 
