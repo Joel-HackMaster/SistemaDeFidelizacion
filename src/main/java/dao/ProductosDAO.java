@@ -79,9 +79,42 @@ public class ProductosDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        System.out.println("Prueba para git");
     }
     return productos;
 }  
+    
+    public ProductoEntity obtenerProductosxModelo(String modelo) {
+        ProductoEntity producto = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+    
+        try {
+            String sql = "SELECT stock, precio, descripcion, detalle, puntosxconv FROM tt_producto WHERE modelo = ?";  
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, modelo);
+            rs = ps.executeQuery();
+        
+            String descrip = rs.getString("descripcion");
+            String detalle = rs.getString("detalle");
+            int stock = rs.getInt("Stock");
+            int puntos = rs.getInt("puntos");
+            float precio = rs.getInt("precio");
+        
+            producto = new ProductoEntity(descrip, detalle, precio, stock, puntos);
+        
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+        try {
+            if (rs != null) rs.close();
+            if (ps != null) ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+        return producto;
+    }  
     
    public float obtenerPrecioPorId(int id) {
     float precio = 0;
