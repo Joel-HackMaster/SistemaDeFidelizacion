@@ -16,6 +16,7 @@ public class ProductoEntity {
     Integer stock;
     Integer puntosxconv;
     Integer puntosxvent;
+    String modelo;
 
     public ProductoEntity(Integer id, float precio) {
         this.id = id;
@@ -28,7 +29,21 @@ public class ProductoEntity {
         this.precio = precio;
         this.stock = stock;
     }
-    
+
+    public ProductoEntity(String descripcion, String detalle, Integer stock, Integer puntosxconv) {
+        this.descripcion = descripcion;
+        this.detalle = detalle;
+        this.stock = stock;
+        this.puntosxconv = puntosxconv;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
     
 
     public Integer getId() {
