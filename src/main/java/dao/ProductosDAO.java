@@ -154,7 +154,7 @@ public class ProductosDAO {
     ResultSet rs = null;
 
     try {
-        String sql = "SELECT descripcion, detalle, precio, puntosxconv stock FROM tt_producto WHERE modelo = ?";
+        String sql = "SELECT descripcion, detalle, precio, puntosxconv, stock FROM tt_producto WHERE modelo = ?";
         ps = con.prepareStatement(sql);
         ps.setString(1, modelo);
         rs = ps.executeQuery();
@@ -179,5 +179,30 @@ public class ProductosDAO {
         }
     }
         return producto;
+    }
+   
+   public int obtenerID(String modelo){
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        int id = 0;
+        
+        try{
+          String sql = "SELECT id FROM tt_producto WHERE modelo = ?";
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, modelo);
+            rs = ps.executeQuery();
+            id = rs.getInt("id");
+            System.out.println("ID producto: "+id);
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally {
+            try {
+                if (rs != null) rs.close();
+                if (ps != null) ps.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return id;
     }
 }

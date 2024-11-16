@@ -317,18 +317,18 @@ public class InternalRegistrarVenta extends javax.swing.JInternalFrame {
     
     private void btnRegistrarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarVentaActionPerformed
         try {
-                Connection con = conexionController.conectar(); // Establece la conexión
-
+                Connection con = conexionController.conectar();
+                VendedorDAO vendDAO = new VendedorDAO(con);
+                ProductosDAO prodDAO = new ProductosDAO(con);
                 // Obtén el vendedor y producto seleccionados
-               int selectedIdVendedor = 0;
-               selectedIdVendedor = Integer.parseInt((String) comboBoxVendedor.getSelectedItem());
+               String selectedVendedor = (String)comboBoxVendedor.getSelectedItem();
+               int idVend = vendDAO.obtenerID(selectedVendedor);
                
-               int selectedIdProducto = 0;
-               selectedIdProducto = Integer.parseInt((String) comboBoxProducto.getSelectedItem());
-               
+               String selectedProducto = (String) comboBoxProducto.getSelectedItem();
+               int idProd = prodDAO.obtenerID(selectedProducto);
 
                 // Verifica que se haya seleccionado un vendedor y un producto
-                if (selectedIdVendedor == 0 || selectedIdProducto == 0) {
+                if (selectedVendedor == "" || selectedProducto == "") {
                     JOptionPane.showMessageDialog(null, "Por favor selecciona un vendedor y un producto.");
                     return;
                 }
@@ -341,7 +341,7 @@ public class InternalRegistrarVenta extends javax.swing.JInternalFrame {
                 // Crear una nueva instancia de VentaEntity
                 VentasDAO nuevaVenta = new VentasDAO(con);
                 
-                Boolean exito = nuevaVenta.registrarVenta(selectedIdVendedor, selectedIdProducto, cliente, montoVenta, detalleVenta);
+                Boolean exito = nuevaVenta.registrarVenta(idVend, idProd, cliente, montoVenta, detalleVenta);
                 
                 if(exito) JOptionPane.showMessageDialog(null, "Venta registrada exitosamente.");
                 

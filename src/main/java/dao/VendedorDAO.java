@@ -149,4 +149,29 @@ public class VendedorDAO {
         }
         return vendedores;
     }
+    
+    public int obtenerID(String nombreCompleto){
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        int id = 0;
+        
+        try{
+          String sql = "SELECT id FROM tt_vendedor WHERE CONCAT(nombres, ' ', apellidos) = ?;";
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, nombreCompleto);
+            rs = ps.executeQuery();
+            id = rs.getInt("id");
+            System.out.println("ID Vendedor: "+id);
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally {
+            try {
+                if (rs != null) rs.close();
+                if (ps != null) ps.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return id;
+    }
 }
