@@ -58,15 +58,16 @@ public class ProductosDAO {
         ResultSet rs = null;
     
     try {
-        String sql = "SELECT id, descripcion, precio FROM tt_producto ORDER BY id";  
+        String sql = "SELECT id, modelo,descripcion, precio FROM tt_producto ORDER BY id";  
         ps = connection.prepareStatement(sql);
         rs = ps.executeQuery();
         
         while (rs.next()) {
             int id = rs.getInt("id");
+            String modelo = rs.getString("modelo");
             String descripcion = rs.getString("descripcion");
-            float precio = rs.getFloat("precio");        
-            ProductoEntity producto = new ProductoEntity(id, descripcion, precio);
+            float precio = rs.getFloat("precio");
+            ProductoEntity producto = new ProductoEntity(id, descripcion, precio, modelo);
             
             productos.add(producto);
         }
@@ -145,16 +146,17 @@ public class ProductosDAO {
     return precio;
     }
    
-   public ProductoEntity obtenerProductoPorId(int id) {
+   
+   public ProductoEntity obtenerProductoPorModelo(String modelo) {
     ProductoEntity producto = null;
     Connection con = conexionController.conectar();
     PreparedStatement ps = null;
     ResultSet rs = null;
 
     try {
-        String sql = "SELECT descripcion, detalle, precio, puntosxconv stock FROM tt_producto WHERE id = ?";
+        String sql = "SELECT descripcion, detalle, precio, puntosxconv stock FROM tt_producto WHERE modelo = ?";
         ps = con.prepareStatement(sql);
-        ps.setInt(1, id);
+        ps.setString(1, modelo);
         rs = ps.executeQuery();
 
         if (rs.next()) {
@@ -176,6 +178,6 @@ public class ProductosDAO {
             e.printStackTrace();
         }
     }
-    return producto;
+        return producto;
     }
 }

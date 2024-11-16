@@ -168,10 +168,6 @@ public class InternalRegistrarVenta extends javax.swing.JInternalFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(229, 229, 229)
-                .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, 392, Short.MAX_VALUE)
-                .addGap(258, 258, 258))
             .addComponent(jScrollPane5)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,13 +180,13 @@ public class InternalRegistrarVenta extends javax.swing.JInternalFrame {
                             .addComponent(jLabel19)
                             .addComponent(jLabel18))
                         .addGap(78, 78, 78)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
                             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(comboBoxVendedor, javax.swing.GroupLayout.Alignment.LEADING, 0, 155, Short.MAX_VALUE)
-                                .addComponent(comboBoxProducto, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtObtenerPrecio, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtCliente, javax.swing.GroupLayout.Alignment.LEADING))))
+                                .addComponent(txtObtenerPrecio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
+                                .addComponent(txtCliente, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(comboBoxProducto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(comboBoxVendedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addComponent(btnRegistrarVenta)
@@ -198,7 +194,11 @@ public class InternalRegistrarVenta extends javax.swing.JInternalFrame {
                         .addComponent(btnquicksort)
                         .addGap(31, 31, 31)
                         .addComponent(btnListadonormal)))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addGap(229, 229, 229)
+                .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(258, 258, 258))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,7 +210,7 @@ public class InternalRegistrarVenta extends javax.swing.JInternalFrame {
                     .addComponent(jLabel18)
                     .addComponent(comboBoxVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel19)
                     .addComponent(comboBoxProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -279,12 +279,12 @@ public class InternalRegistrarVenta extends javax.swing.JInternalFrame {
         List<ProductoEntity> listaProductos = productodao.obtenerProductos();
         System.out.println("Lista de productos: "+listaProductos);
         for (ProductoEntity producto : listaProductos) {
-            System.out.println("Descripcion de producto: " + producto.getDescripcion());
-            String descripcion = producto.getDescripcion();
-            comboBoxProducto.addItem(""+descripcion); 
+            System.out.println("Descripcion de producto: " + producto.getModelo());
+            String modelo = producto.getModelo();
+            comboBoxProducto.addItem(modelo);
         }
         
-         if (con != null) {
+        if (con != null) {
             try {
                 con.close();
             } catch (SQLException e) {
@@ -369,14 +369,13 @@ public class InternalRegistrarVenta extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         Connection con = conexionController.conectar();
         
-        int selectedItem = 0;
-        selectedItem = Integer.parseInt((String) comboBoxProducto.getSelectedItem());
+        String selectedItem = (String)comboBoxProducto.getSelectedItem();
 
-    if (selectedItem != 0) {
-        int productId = selectedItem;
+    if (selectedItem != "") {
+        String modeloProd = selectedItem;
 
         ProductosDAO productodao = new ProductosDAO(con);
-        ProductoEntity producto = productodao.obtenerProductoPorId(productId);
+        ProductoEntity producto = productodao.obtenerProductoPorModelo(modeloProd);
 
         if (producto != null) {
             float precio = producto.getPrecio();
@@ -385,7 +384,7 @@ public class InternalRegistrarVenta extends javax.swing.JInternalFrame {
             txtObtenerPrecio.setText(String.valueOf(precio));
             jTextArea1.setText(detalle); 
         } else {
-            System.out.println("Producto no encontrado con id: " + productId);
+            System.out.println("Producto no encontrado con id: " + modeloProd);
         }
     } else {
         System.out.println("No hay producto seleccionado.");

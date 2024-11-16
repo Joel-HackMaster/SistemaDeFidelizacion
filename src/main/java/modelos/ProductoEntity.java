@@ -18,10 +18,11 @@ public class ProductoEntity {
     Integer puntosxvent;
     String modelo;
 
-    public ProductoEntity(Integer id, String descripcion,float precio) {
+    public ProductoEntity(Integer id, String descripcion,float precio,String modelo) {
         this.id = id;
         this.descripcion = descripcion;
         this.precio = precio;
+        this.modelo = modelo;
     }
 
     public ProductoEntity(String descripcion, String detalle, float precio, Integer stock, Integer puntosxconv) {

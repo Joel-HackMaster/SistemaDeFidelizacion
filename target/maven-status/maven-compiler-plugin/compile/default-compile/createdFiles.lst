@@ -4,12 +4,15 @@ Vistas\InterProducto$3.class
 Vistas\InterProducto.class
 Vistas\InternalVendedor$3.class
 Vistas\InternalRegistrarVenta$4.class
+com\mycompany\sistemadefidelizacion\InterfazInicial$1.class
 controller\conexionController.class
 metodos\ListaEnlazadaVendedores.class
+Vistas\ProductosXCanje.class
 Vistas\InternalRegistrarVenta$1.class
 Vistas\InternalVendedor$6.class
 Vistas\Login$2.class
 dao\PuntosVentaDAO.class
+Vistas\FramePuntosXcanjear.class
 com\mycompany\sistemadeventas\SistemaDeVentas.class
 Vistas\RegistroVendedor.class
 Vistas\InternalRegistrarVenta$3.class
@@ -19,11 +22,13 @@ Vistas\InternalRegistrarVenta$7.class
 Vistas\InternalVendedor$5.class
 modelos\VentaEntity.class
 Vistas\RegistroVendedor$1.class
+com\mycompany\sistemadefidelizacion\SistemaDeFidelizacion.class
 Vistas\InternalVendedor.class
 Vistas\DashboardAdmin$4.class
 dao\AdministradorDAO.class
 Vistas\DashboardAdmin.class
 Vistas\InternalVendedor$2.class
+com\mycompany\sistemadefidelizacion\InterfazInicial.class
 metodos\quicksort.class
 Vistas\Login$1.class
 Vistas\Login.class
@@ -47,6 +52,7 @@ Vistas\InternalRegistrarVenta$8.class
 dao\ProductosDAO.class
 Vistas\InternalRegistrarVenta$2.class
 modelos\DetalleAcumulacionEntity.class
+Vistas\ProductosXCanje$1.class
 modelos\CanjeEntity.class
 modelos\AdministradorEntity.class
 modelos\TipoAcumulacionEntity.class
