@@ -447,6 +447,4 @@ public class InternalRegistrarVenta extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtCliente;
     private javax.swing.JTextField txtObtenerPrecio;
     // End of variables declaration//GEN-END:variables
-
-
 }

@@ -8,10 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import modelos.VendedorEntity;
 
-/**
- *
- * @author jwsb1
- */
 public class ListaEnlazadaVendedores {
     private Nodo cabeza;
     
@@ -34,15 +30,14 @@ public class ListaEnlazadaVendedores {
     
     public void agregarInicio(VendedorEntity vendedor) {
         Nodo nuevoNodo = new Nodo(vendedor);
-        nuevoNodo.siguiente = cabeza; // El nuevo nodo apunta a lo que era la cabeza
-        cabeza = nuevoNodo; // Actualiza la cabeza al nuevo nodo
+        nuevoNodo.siguiente = cabeza;
+        cabeza = nuevoNodo; 
     }
     
-     public List<VendedorEntity> obtenerVendedoresComoLista() {
+    public List<VendedorEntity> obtenerVendedoresComoLista() {
         List<VendedorEntity> listaVendedores = new ArrayList<>();
         Nodo temp = cabeza;
         while (temp != null) {
-            // Suponiendo que quieres mostrar el nombre y apellido
             listaVendedores.add(temp.vendedor);
             temp = temp.siguiente;
         }
