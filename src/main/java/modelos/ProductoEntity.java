@@ -18,24 +18,20 @@ public class ProductoEntity {
     Integer puntosxvent;
     String modelo;
 
-    public ProductoEntity(Integer id, float precio) {
+    public ProductoEntity(Integer id, String descripcion,float precio) {
         this.id = id;
+        this.descripcion = descripcion;
         this.precio = precio;
     }
 
-    public ProductoEntity(String descripcion, String detalle, float precio, Integer stock) {
+    public ProductoEntity(String descripcion, String detalle, float precio, Integer stock, Integer puntosxconv) {
         this.descripcion = descripcion;
         this.detalle = detalle;
         this.precio = precio;
-        this.stock = stock;
-    }
-
-    public ProductoEntity(String descripcion, String detalle, Integer stock, Integer puntosxconv) {
-        this.descripcion = descripcion;
-        this.detalle = detalle;
         this.stock = stock;
         this.puntosxconv = puntosxconv;
     }
+    
 
     public String getModelo() {
         return modelo;
