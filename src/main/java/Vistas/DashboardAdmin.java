@@ -66,6 +66,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDesktopPane1 = new javax.swing.JDesktopPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -86,6 +87,18 @@ public class DashboardAdmin extends javax.swing.JFrame {
         BotonRegistrarVenta = new javax.swing.JMenuItem();
         MenuProducto = new javax.swing.JMenu();
         BotonProducto = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
+
+        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
+        jDesktopPane1.setLayout(jDesktopPane1Layout);
+        jDesktopPane1Layout.setHorizontalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jDesktopPane1Layout.setVerticalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(1200, 800));
@@ -190,8 +203,6 @@ public class DashboardAdmin extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\jwsb1.JOEL.000\\OneDrive - Universidad Tecnologica del Peru\\ProyectoAyE\\SistemaDeVentas\\src\\main\\java\\assets\\dashboard.jpg")); // NOI18N
-
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 255, 0), 3, true));
 
@@ -290,6 +301,14 @@ public class DashboardAdmin extends javax.swing.JFrame {
         });
         MenuProducto.add(BotonProducto);
 
+        jMenuItem1.setText("Canjear Puntos");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        MenuProducto.add(jMenuItem1);
+
         jMenuBar1.add(MenuProducto);
 
         setJMenuBar(jMenuBar1);
@@ -375,25 +394,6 @@ public class DashboardAdmin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_BotonVendedorActionPerformed
 
-    private void BotonProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonProductoActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
-        InterProducto productregis = new InterProducto();
-        int ancho = productregis.getWidth();
-        int alto = productregis.getHeight();
-        DashboardAdmin nuevoFrame =new DashboardAdmin(ancho, alto);
-        nuevoFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        nuevoFrame.add(this.JDeskPanel.add(productregis));
-        productregis.setVisible(true);
-        
-        try {
-            productregis.setSelected(true);
-        } catch (java.beans.PropertyVetoException e) {
-            e.printStackTrace();
-        }
-    }//GEN-LAST:event_BotonProductoActionPerformed
-
     private void BotonRegistrarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonRegistrarVentaActionPerformed
         // TODO add your handling code here:
         this.dispose();
@@ -413,9 +413,44 @@ public class DashboardAdmin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_BotonRegistrarVentaActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void BotonProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonProductoActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        InterProducto productregis = new InterProducto();
+        int ancho = productregis.getWidth();
+        int alto = productregis.getHeight();
+        DashboardAdmin nuevoFrame =new DashboardAdmin(ancho, alto);
+        nuevoFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        nuevoFrame.add(this.JDeskPanel.add(productregis));
+        productregis.setVisible(true);
+
+        try {
+            productregis.setSelected(true);
+        } catch (java.beans.PropertyVetoException e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_BotonProductoActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        this.dispose();
+        
+        FramePuntosXcanjear puntosXcanjear = new FramePuntosXcanjear();
+        int ancho = puntosXcanjear.getWidth();
+        int alto = puntosXcanjear.getHeight();
+        DashboardAdmin nuevoFrame =new DashboardAdmin(ancho, alto);
+        nuevoFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        nuevoFrame.add(this.JDeskPanel.add(puntosXcanjear));
+        puntosXcanjear  .setVisible(true);
+
+        try {
+            puntosXcanjear.setSelected(true);
+        } catch (java.beans.PropertyVetoException e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -459,11 +494,13 @@ public class DashboardAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel LabelVendedorMaximo;
     private javax.swing.JMenu MenuProducto;
     private javax.swing.JMenu MenuVendedor;
+    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

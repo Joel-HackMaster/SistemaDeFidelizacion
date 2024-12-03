@@ -268,11 +268,11 @@ public class InternalRegistrarVenta extends javax.swing.JInternalFrame {
             try {
                 con.close();
             } catch (SQLException e) {
-                e.printStackTrace();
+                e.printStackTrace();            
             }
         }
     }
-    
+      
    private void cargarProductos() {
         Connection con = conexionController.conectar();
         ProductosDAO productodao = new ProductosDAO(con);
