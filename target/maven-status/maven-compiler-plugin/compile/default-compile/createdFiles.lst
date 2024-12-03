@@ -18,6 +18,7 @@ Vistas\FramePuntosXcanjear.class
 com\mycompany\sistemadeventas\SistemaDeVentas.class
 Vistas\RegistroVendedor.class
 Vistas\InternalRegistrarVenta$3.class
+Vistas\DashboardAdmin$7.class
 modelos\VendedorEntity.class
 Vistas\DashboardAdmin$1.class
 Vistas\InternalRegistrarVenta$7.class

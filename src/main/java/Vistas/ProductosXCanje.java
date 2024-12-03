@@ -58,12 +58,9 @@ public class ProductosXCanje extends javax.swing.JInternalFrame {
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Canjear Producto");
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("Canjear");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -71,77 +68,61 @@ public class ProductosXCanje extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(255, 255, 255));
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 0, 0));
         jButton2.setText("Canjear");
 
-        jButton3.setBackground(new java.awt.Color(255, 255, 255));
         jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(0, 0, 0));
         jButton3.setText("Canjear");
 
-        jButton4.setBackground(new java.awt.Color(255, 255, 255));
         jButton4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(0, 0, 0));
         jButton4.setText("Canjear");
 
-        jButton5.setBackground(new java.awt.Color(255, 255, 255));
         jButton5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(0, 0, 0));
         jButton5.setText("Canjear");
 
-        jButton6.setBackground(new java.awt.Color(255, 255, 255));
         jButton6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(0, 0, 0));
         jButton6.setText("Canjear");
 
         lblimagen.setBackground(new java.awt.Color(255, 255, 255));
         lblimagen.setForeground(new java.awt.Color(255, 255, 255));
-        lblimagen.setIcon(new javax.swing.ImageIcon("C:\\Users\\GHOST\\Desktop\\Alg_Est1\\SistemaDeFidelizacion\\src\\main\\java\\assets\\TV_ID_3.jpeg")); // NOI18N
+        lblimagen.setIcon(new javax.swing.ImageIcon("D:\\Programacion Java\\AlgoritmosEstructura\\ProjectoAlgoritmos\\SistemaDeFidelizacion\\src\\main\\java\\assets\\TV_ID_3.jpeg")); // NOI18N
 
         lblimagen1.setBackground(new java.awt.Color(255, 255, 255));
         lblimagen1.setForeground(new java.awt.Color(255, 255, 255));
-        lblimagen1.setIcon(new javax.swing.ImageIcon("C:\\Users\\GHOST\\Desktop\\Alg_Est1\\SistemaDeFidelizacion\\src\\main\\java\\assets\\TV_ID_4.jpeg")); // NOI18N
+        lblimagen1.setIcon(new javax.swing.ImageIcon("D:\\Programacion Java\\AlgoritmosEstructura\\ProjectoAlgoritmos\\SistemaDeFidelizacion\\src\\main\\java\\assets\\TV_ID_4.jpeg")); // NOI18N
 
         lblimagen2.setBackground(new java.awt.Color(255, 255, 255));
         lblimagen2.setForeground(new java.awt.Color(255, 255, 255));
-        lblimagen2.setIcon(new javax.swing.ImageIcon("C:\\Users\\GHOST\\Desktop\\Alg_Est1\\SistemaDeFidelizacion\\src\\main\\java\\assets\\TV_ID_1.jpeg")); // NOI18N
+        lblimagen2.setIcon(new javax.swing.ImageIcon("D:\\Programacion Java\\AlgoritmosEstructura\\ProjectoAlgoritmos\\SistemaDeFidelizacion\\src\\main\\java\\assets\\TV_ID_1.jpeg")); // NOI18N
 
         lblimagen3.setBackground(new java.awt.Color(255, 255, 255));
         lblimagen3.setForeground(new java.awt.Color(255, 255, 255));
-        lblimagen3.setIcon(new javax.swing.ImageIcon("C:\\Users\\GHOST\\Desktop\\Alg_Est1\\SistemaDeFidelizacion\\src\\main\\java\\assets\\TV_ID_1.jpeg")); // NOI18N
+        lblimagen3.setIcon(new javax.swing.ImageIcon("D:\\Programacion Java\\AlgoritmosEstructura\\ProjectoAlgoritmos\\SistemaDeFidelizacion\\src\\main\\java\\assets\\TV_ID_1.jpeg")); // NOI18N
 
         lblimagen7.setBackground(new java.awt.Color(255, 255, 255));
         lblimagen7.setForeground(new java.awt.Color(255, 255, 255));
-        lblimagen7.setIcon(new javax.swing.ImageIcon("C:\\Users\\GHOST\\Desktop\\Alg_Est1\\SistemaDeFidelizacion\\src\\main\\java\\assets\\TV_ID_2.jpeg")); // NOI18N
+        lblimagen7.setIcon(new javax.swing.ImageIcon("D:\\Programacion Java\\AlgoritmosEstructura\\ProjectoAlgoritmos\\SistemaDeFidelizacion\\src\\main\\java\\assets\\TV_ID_2.jpeg")); // NOI18N
 
         lblimagen5.setBackground(new java.awt.Color(255, 255, 255));
         lblimagen5.setForeground(new java.awt.Color(255, 255, 255));
-        lblimagen5.setIcon(new javax.swing.ImageIcon("C:\\Users\\GHOST\\Desktop\\Alg_Est1\\SistemaDeFidelizacion\\src\\main\\java\\assets\\TV_ID_7.jpeg")); // NOI18N
+        lblimagen5.setIcon(new javax.swing.ImageIcon("D:\\Programacion Java\\AlgoritmosEstructura\\ProjectoAlgoritmos\\SistemaDeFidelizacion\\src\\main\\java\\assets\\TV_ID_7.jpeg")); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Stock");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Stock");
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Stock");
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Stock: ");
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Stock");
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("Stock: ");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -243,37 +224,24 @@ public class ProductosXCanje extends javax.swing.JInternalFrame {
 
         jLabel3.setBackground(new java.awt.Color(0, 0, 0));
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Canjear Puntos");
 
-        jButton7.setBackground(new java.awt.Color(255, 255, 255));
         jButton7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton7.setForeground(new java.awt.Color(0, 0, 0));
         jButton7.setText("Canjear");
 
-        jButton8.setBackground(new java.awt.Color(255, 255, 255));
         jButton8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton8.setForeground(new java.awt.Color(0, 0, 0));
         jButton8.setText("Canjear");
 
-        jButton9.setBackground(new java.awt.Color(255, 255, 255));
         jButton9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton9.setForeground(new java.awt.Color(0, 0, 0));
         jButton9.setText("Canjear");
 
-        jButton10.setBackground(new java.awt.Color(255, 255, 255));
         jButton10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton10.setForeground(new java.awt.Color(0, 0, 0));
         jButton10.setText("Canjear");
 
-        jButton11.setBackground(new java.awt.Color(255, 255, 255));
         jButton11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton11.setForeground(new java.awt.Color(0, 0, 0));
         jButton11.setText("Canjear");
 
-        jButton12.setBackground(new java.awt.Color(255, 255, 255));
         jButton12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton12.setForeground(new java.awt.Color(0, 0, 0));
         jButton12.setText("Canjear");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
