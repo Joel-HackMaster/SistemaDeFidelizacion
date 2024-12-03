@@ -88,6 +88,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
         MenuProducto = new javax.swing.JMenu();
         BotonProducto = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -309,6 +310,14 @@ public class DashboardAdmin extends javax.swing.JFrame {
         });
         MenuProducto.add(jMenuItem1);
 
+        jMenuItem2.setText("Canjear Tv");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        MenuProducto.add(jMenuItem2);
+
         jMenuBar1.add(MenuProducto);
 
         setJMenuBar(jMenuBar1);
@@ -451,6 +460,25 @@ public class DashboardAdmin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        this.dispose();
+        
+        ProductosXCanje productosXCanje = new ProductosXCanje();
+        int ancho = productosXCanje.getWidth();
+        int alto = productosXCanje .getHeight();
+        DashboardAdmin nuevoFrame =new DashboardAdmin(ancho, alto);
+        nuevoFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        nuevoFrame.add(this.JDeskPanel.add(productosXCanje ));
+        productosXCanje .setVisible(true);
+
+        try {   
+            productosXCanje.setSelected(true);
+        } catch (java.beans.PropertyVetoException e) {
+            e.printStackTrace();
+        }  
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -501,6 +529,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

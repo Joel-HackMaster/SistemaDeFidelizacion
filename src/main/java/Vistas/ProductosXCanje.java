@@ -1,22 +1,35 @@
-package Vistas;
+package Vistas; 
         
 import controller.conexionController;
 import dao.VendedorDAO;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import modelos.VendedorEntity;
 
 public class ProductosXCanje extends javax.swing.JInternalFrame {
+    
+    public ProductosXCanje() {
         
-    public ProductosXCanje() {  
+        setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));  
+        
+        JButton btnCanjear1 = new JButton("Canjear");
+        JButton btnCanjear2 = new JButton("Canjear");
+        JButton btnCanjear3 = new JButton("Canjear");
+        JButton btnCanjear4 = new JButton("Canjear");
+        JButton btnCanjear5 = new JButton("Canjear");
+        JButton btnCanjear6 = new JButton("Canjear");
+        
+            
         initComponents();
-        
     }
+            
+    
     @SuppressWarnings("unchecked")
-    
-    
-   
+
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -154,8 +167,9 @@ public class ProductosXCanje extends javax.swing.JInternalFrame {
                     .addComponent(lblimagen1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblimagen2)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
                         .addComponent(jButton1)
-                        .addGap(29, 29, 29)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel9))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton4)
@@ -342,11 +356,12 @@ public class ProductosXCanje extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-            
+
+         
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
     }//GEN-LAST:event_jButton1ActionPerformed
-
+     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;

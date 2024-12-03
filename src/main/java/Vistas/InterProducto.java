@@ -12,6 +12,10 @@ import modelos.ProductoEntity;
  */
 public class InterProducto extends javax.swing.JInternalFrame {
 
+    static void setVisble(boolean b) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     
     public InterProducto() {
         initComponents();
