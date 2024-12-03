@@ -4,29 +4,34 @@
  */
 package modelos;
 
+import java.sql.Date;
+
 /**
  *
  * @author jwsb1
  */
 public class DetalleAcumulacionEntity {
     private Integer id;
-    private String NroRecibo;
-    private String TipoAcumulacion;
-    private int puntosObtenidos;
+    private Integer idvendedor;
+    private Integer venta;
+    private Integer idtipoacum;
+    private Integer puntos;
+    private Date fecha_acum;
+    private boolean bono_cum;
 
-    public DetalleAcumulacionEntity(String NroRecibo, String TipoAcumulacion, int puntosObtenidos) {
-        this.NroRecibo = NroRecibo;
-        this.TipoAcumulacion = TipoAcumulacion;
-        this.puntosObtenidos = puntosObtenidos;
+    public DetalleAcumulacionEntity() {
     }
-    
-    public DetalleAcumulacionEntity(Integer id, String NroRecibo, String TipoAcumulacion, int puntosObtenidos) {
+
+    public DetalleAcumulacionEntity(Integer id, Integer idtipoacum, Integer puntos, Date fecha_acum, boolean bono_cum) {
         this.id = id;
-        this.NroRecibo = NroRecibo;
-        this.TipoAcumulacion = TipoAcumulacion;
-        this.puntosObtenidos = puntosObtenidos;
+        this.idtipoacum = idtipoacum;
+        this.puntos = puntos;
+        this.fecha_acum = fecha_acum;
+        this.bono_cum = bono_cum;
     }
 
+    
+    
     public Integer getId() {
         return id;
     }
@@ -35,27 +40,53 @@ public class DetalleAcumulacionEntity {
         this.id = id;
     }
 
-    public String getNroRecibo() {
-        return NroRecibo;
+    public Integer getIdvendedor() {
+        return idvendedor;
     }
 
-    public void setNroRecibo(String NroRecibo) {
-        this.NroRecibo = NroRecibo;
+    public void setIdvendedor(Integer idvendedor) {
+        this.idvendedor = idvendedor;
     }
 
-    public String getTipoAcumulacion() {
-        return TipoAcumulacion;
+    public Integer getVenta() {
+        return venta;
     }
 
-    public void setTipoAcumulacion(String TipoAcumulacion) {
-        this.TipoAcumulacion = TipoAcumulacion;
+    public void setVenta(Integer venta) {
+        this.venta = venta;
     }
 
-    public int getPuntosObtenidos() {
-        return puntosObtenidos;
+    public Integer getIdtipoacum() {
+        return idtipoacum;
     }
 
-    public void setPuntosObteneidos(int puntosObtenidos) {
-        this.puntosObtenidos = puntosObtenidos;
+    public void setIdtipoacum(Integer idtipoacum) {
+        this.idtipoacum = idtipoacum;
     }
+
+    public Integer getPuntos() {
+        return puntos;
+    }
+
+    public void setPuntos(Integer puntos) {
+        this.puntos = puntos;
+    }
+
+    public Date getFecha_acum() {
+        return fecha_acum;
+    }
+
+    public void setFecha_acum(Date fecha_acum) {
+        this.fecha_acum = fecha_acum;
+    }
+
+    public boolean isBono_cum() {
+        return bono_cum;
+    }
+
+    public void setBono_cum(boolean bono_cum) {
+        this.bono_cum = bono_cum;
+    }
+
+    
 }

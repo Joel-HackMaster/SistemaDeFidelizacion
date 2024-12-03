@@ -15,8 +15,13 @@ public class BaseEntity {
     private String apellidos;
     private String correo;
     private String password;
+
+    public BaseEntity() {
+    }
     
-    
+    public BaseEntity(int id) {
+        this.id = id;
+    }
     
     public BaseEntity(String nombres, String dni, String apellidos, String correo) {
         this.nombres = nombres;

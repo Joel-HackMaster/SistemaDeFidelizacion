@@ -6,9 +6,14 @@ package Vistas;
 
 import controller.conexionController;
 import dao.VendedorDAO;
+import java.awt.Image;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import modelos.DetalleAcumulacionEntity;
 import modelos.VendedorEntity;
 
 /**
@@ -22,18 +27,47 @@ public class FramePuntosXcanjear extends javax.swing.JInternalFrame {
      */
     public FramePuntosXcanjear() {
         initComponents();
+        cargarVendedores();
     }
 
-      private void cargarVendedores() {
-        Connection con = conexionController.conectar(); 
+    private void mostrarImagen(int idVendedor) {
+        try {
+            Connection con = conexionController.conectar();
+            VendedorDAO vend = new VendedorDAO(con);
+            // Cargar la imagen desde la carpeta de recursos
+            String furia = "D:\\Programacion Java\\AlgoritmosEstructura\\ProjectoAlgoritmos\\SistemaDeFidelizacion\\src\\main\\java\\assets\\furia.png";
+            String feliz = "D:\\Programacion Java\\AlgoritmosEstructura\\ProjectoAlgoritmos\\SistemaDeFidelizacion\\src\\main\\java\\assets\\feliz.jpg";
+            int verificar = vend.ValidarBonoCumple(idVendedor);
+            ImageIcon originalIcon = new ImageIcon();
+            if (verificar == 1) {
+                originalIcon = new ImageIcon(feliz);
+            } else {
+                originalIcon = new ImageIcon(furia);
+            }
+
+            Image img = originalIcon.getImage();  // Obtener la imagen original
+
+            // Redimensionar la imagen al tamaño deseado (puedes ajustar el tamaño)
+            Image scaledImg = img.getScaledInstance(100, 100, Image.SCALE_SMOOTH);  // Cambiar el tamaño a 100x100 píxeles
+            ImageIcon scaledIcon = new ImageIcon(scaledImg);  // Crear un ImageIcon con la imagen redimensionada
+
+            // Establecer la imagen redimensionada en el JLabel
+            ImageLabel.setIcon(scaledIcon);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al cargar la imagen", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void cargarVendedores() {
+        Connection con = conexionController.conectar();
         VendedorDAO vendedordao = new VendedorDAO(con);
         List<VendedorEntity> ListaVendedores = vendedordao.obtenerIDVendedor();
-        
+
         for (VendedorEntity vendedor : ListaVendedores) {
-            String nombreCompleto = vendedor.getNombres()+' '+vendedor.getApellidos();
+            String nombreCompleto = vendedor.getNombres() + ' ' + vendedor.getApellidos();
             System.out.println("Vendedor encontrado con id: " + nombreCompleto);
             ComboNombre.addItem(nombreCompleto);
-        }       
+        }
         if (con != null) {
             try {
                 con.close();
@@ -42,6 +76,22 @@ public class FramePuntosXcanjear extends javax.swing.JInternalFrame {
             }
         }
     }
+    
+    public void rellenarTabla(int idVendedor){
+        Connection con = conexionController.conectar();
+        VendedorDAO vendedor = new VendedorDAO(con);
+        String[] columnNames = {"id", "tipo", "puntos", "fecha", "bono"};
+        DefaultTableModel modelo = new DefaultTableModel(columnNames, 0);
+                
+        List<DetalleAcumulacionEntity> detalles = vendedor.obtenerPuntosVendedores(idVendedor);
+        
+        for (DetalleAcumulacionEntity d: detalles) {
+            Object[] fila = {d.getId(), d.getIdtipoacum(), d.getPuntos(), d.getFecha_acum(), d.isBono_cum()};
+            modelo.addRow(fila);
+        }
+        TablaAcumulacion.setModel(modelo);
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -60,15 +110,17 @@ public class FramePuntosXcanjear extends javax.swing.JInternalFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         txtCostoPuntosxCanje = new javax.swing.JTextPane();
         jButton1 = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        txtPuntosVendedor = new javax.swing.JTextPane();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TablaAcumulacion = new javax.swing.JTable();
         jScrollPane5 = new javax.swing.JScrollPane();
         txtProductoCajear = new javax.swing.JTextPane();
         jLabel11 = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        ImageLabel = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        PuntosAcumLabel = new javax.swing.JLabel();
+        BotonBonoCumple = new javax.swing.JButton();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
 
         jScrollPane1.setViewportView(jTextPane1);
@@ -87,26 +139,20 @@ public class FramePuntosXcanjear extends javax.swing.JInternalFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("¡Canjeando Puntos!");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Nombre de vendedor");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Costo de puntos por canje");
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Puntos del vendedor");
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("Producto a canjear");
 
-        ComboNombre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         ComboNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ComboNombreActionPerformed(evt);
@@ -117,7 +163,6 @@ public class FramePuntosXcanjear extends javax.swing.JInternalFrame {
 
         jButton1.setBackground(new java.awt.Color(255, 255, 204));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("CANJEAR PRODUCTO");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,9 +170,7 @@ public class FramePuntosXcanjear extends javax.swing.JInternalFrame {
             }
         });
 
-        jScrollPane3.setViewportView(txtPuntosVendedor);
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TablaAcumulacion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -138,17 +181,30 @@ public class FramePuntosXcanjear extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane4.setViewportView(jTable1);
+        jScrollPane4.setViewportView(TablaAcumulacion);
 
         jScrollPane5.setViewportView(txtProductoCajear);
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("Detalle de producto");
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane6.setViewportView(jTextArea1);
+
+        ImageLabel.setIcon(new javax.swing.ImageIcon("D:\\Programacion Java\\AlgoritmosEstructura\\ProjectoAlgoritmos\\SistemaDeFidelizacion\\src\\main\\java\\assets\\furia.png")); // NOI18N
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel6.setText("Estado del Vendedor:");
+
+        BotonBonoCumple.setBackground(new java.awt.Color(255, 255, 204));
+        BotonBonoCumple.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        BotonBonoCumple.setText("CANJEAR BONO X CUMPLEAÑOS");
+        BotonBonoCumple.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonBonoCumpleActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -158,16 +214,6 @@ public class FramePuntosXcanjear extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane3))
-                        .addGap(31, 31, 31))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -189,21 +235,44 @@ public class FramePuntosXcanjear extends javax.swing.JInternalFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(85, 85, 85)
                                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(58, 58, 58))))
+                        .addGap(58, 58, 58))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel6)
+                                .addGap(18, 18, 18)
+                                .addComponent(ImageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(PuntosAcumLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(31, 31, 31))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(BotonBonoCumple)
+                            .addComponent(jLabel11))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
                         .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(PuntosAcumLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ImageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(jLabel1)))
-                .addGap(62, 62, 62)
+                        .addGap(38, 38, 38)
+                        .addComponent(jLabel6)))
+                .addGap(34, 34, 34)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(ComboNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -223,7 +292,9 @@ public class FramePuntosXcanjear extends javax.swing.JInternalFrame {
                         .addGap(55, 55, 55)
                         .addComponent(jButton1))
                     .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(75, 75, 75)
+                .addGap(18, 18, 18)
+                .addComponent(BotonBonoCumple)
+                .addGap(30, 30, 30)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(25, Short.MAX_VALUE))
         );
@@ -249,16 +320,64 @@ public class FramePuntosXcanjear extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ComboNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboNombreActionPerformed
-        
+        Connection con = conexionController.conectar();
+        String selectedItem = (String) ComboNombre.getSelectedItem();
+
+        if (selectedItem != "") {
+            String modeloProd = selectedItem;
+
+            VendedorDAO vendedordao = new VendedorDAO(con);
+            VendedorEntity vendedor = vendedordao.obtenerPuntosPorNombre(selectedItem);
+
+            if (vendedor != null) {
+                mostrarImagen(vendedor.getId());
+                PuntosAcumLabel.setText(vendedor.getPuntosxacum().toString());
+                rellenarTabla(vendedor.getId());
+            } else {
+                System.out.println("Vendedor no registrado: " + modeloProd);
+            }
+        } else {
+            System.out.println("Vendedor no seleccionado.");
+        }
     }//GEN-LAST:event_ComboNombreActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void BotonBonoCumpleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonBonoCumpleActionPerformed
+        Connection con = conexionController.conectar();
+        String selectedItem = (String) ComboNombre.getSelectedItem();
+        
+        if (selectedItem != "") {
+            String modeloProd = selectedItem;
+
+            VendedorDAO vendedordao = new VendedorDAO(con);
+            VendedorEntity vendedor = vendedordao.obtenerPuntosPorNombre(selectedItem);
+
+            if (vendedor != null) {
+                int resultado = vendedordao.AgregarBonoCumple(vendedor.getId());
+                
+                if(resultado == 0) JOptionPane.showMessageDialog(this,"El vendedor ya tiene el bono por cumpleaños");
+                if(resultado == 1) JOptionPane.showMessageDialog(this,"Bono por cumpleaños registrado");
+                if(resultado == -1) JOptionPane.showMessageDialog(this,"Aun no es el cumpleaños del Vendedor");
+                mostrarImagen(vendedor.getId());
+            } else {
+                System.out.println("Vendedor no registrado:: " + modeloProd);
+            }
+        } else {
+            System.out.println("Vendedor no seleccionado.");
+        }
+
+    }//GEN-LAST:event_BotonBonoCumpleActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BotonBonoCumple;
     private javax.swing.JComboBox<String> ComboNombre;
+    private javax.swing.JLabel ImageLabel;
+    private javax.swing.JLabel PuntosAcumLabel;
+    private javax.swing.JTable TablaAcumulacion;
     private javax.swing.Box.Filler filler1;
     private javax.swing.JButton jButton1;
     private javax.swing.JDialog jDialog1;
@@ -268,19 +387,17 @@ public class FramePuntosXcanjear extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextPane jTextPane1;
     private javax.swing.JTextPane txtCostoPuntosxCanje;
     private javax.swing.JTextPane txtProductoCajear;
-    private javax.swing.JTextPane txtPuntosVendedor;
     // End of variables declaration//GEN-END:variables
 }

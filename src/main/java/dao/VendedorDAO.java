@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.sql.Date;
+import modelos.DetalleAcumulacionEntity;
 import modelos.VendedorEntity;
 
 /**
@@ -84,12 +86,12 @@ public class VendedorDAO {
         return vendedores;
     }
     
-    public boolean insertarVendedor(String nombres, String apellidos, String dni, String correo) {
+    public boolean insertarVendedor(String nombres, String apellidos, String dni, String correo, Date fechaNac) {
         PreparedStatement ps = null;
         boolean insertado = false;
 
         try {
-            String sql = "INSERT INTO tt_vendedor (nombres, apellidos, dni, correo, password, puntosxacum, puntosxbon) VALUES (?, ?, ?, ? , ?, ?, ?)";
+            String sql = "INSERT INTO tt_vendedor (nombres, apellidos, dni, correo, password, puntosxacum, puntosxbon, fecha_nac) VALUES (?, ?, ?, ? , ?, ?, ?, ?)";
             ps = connection.prepareStatement(sql);
             ps.setString(1, nombres);
             ps.setString(2, apellidos);
@@ -98,6 +100,7 @@ public class VendedorDAO {
             ps.setString(5, dni);
             ps.setInt(6, 0);
             ps.setInt(7, 0);
+            ps.setDate(8, fechaNac);
 
             int filasAfectadas = ps.executeUpdate();
             if (filasAfectadas > 0) {
@@ -113,6 +116,58 @@ public class VendedorDAO {
             }
         }
         return insertado;
+    }
+    
+    public int ValidarBonoCumple(int idVendedor) {
+        PreparedStatement ps = null;
+        int validado=0;
+        ResultSet rs = null;
+
+        try {
+            String sql = "SELECT verificar_bono_cumpleanios(?) as Resultado";
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, idVendedor);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                validado = rs.getInt("Resultado");
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (ps != null) ps.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return validado;
+    }
+    
+    public int AgregarBonoCumple(int idVendedor) {
+        PreparedStatement ps = null;
+        int validado=0;
+        ResultSet rs = null;
+
+        try {
+            String sql = "select registrar_bono_cumpleanos(?) as Resultado";
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, idVendedor);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                validado = rs.getInt("Resultado");
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (ps != null) ps.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return validado;
     }
     
     public List<VendedorEntity> obtenerIDVendedor(){
@@ -173,5 +228,72 @@ public class VendedorDAO {
             }
         }
         return id;
+    }
+    
+    public VendedorEntity obtenerPuntosPorNombre(String nombreCompleto){
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        VendedorEntity vendedor = new VendedorEntity();
+        
+        
+        try{
+          String sql = "SELECT id,puntosxacum,puntosxbon,puntosxcons FROM tt_vendedor WHERE CONCAT(nombres, ' ', apellidos) = ?;";
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, nombreCompleto);
+            rs = ps.executeQuery();
+            
+            if(rs.next()){
+                System.out.println("Puntos acumulados: "+ rs.getInt("puntosxacum"));
+                System.out.println("Puntos bon: "+ rs.getInt("puntosxbon"));
+                System.out.println("Puntos cons: "+ rs.getInt("puntosxcons"));
+                System.out.println("Puntos id: "+ rs.getInt("id"));
+                vendedor = new VendedorEntity(rs.getInt("puntosxacum"), rs.getInt("puntosxbon"), rs.getInt("puntosxcons"), rs.getInt("id"));
+            }
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally {
+            try {
+                if (rs != null) rs.close();
+                if (ps != null) ps.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return vendedor;
+    }
+    
+    public List<DetalleAcumulacionEntity> obtenerPuntosVendedores(int idVendedor) {
+        List<DetalleAcumulacionEntity> detalles = new ArrayList<>();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        try{
+          String sql = "SELECT id , idtipoacum, puntos, fecha_acum, bono_cum from tt_detalleAcumulacion as td where td.idvendedor = ?";
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, idVendedor);
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                int id = rs.getInt("id");
+                int tipo = rs.getInt("idtipoacum");
+                int puntos = rs.getInt("puntos");
+                Date fecha = rs.getDate("fecha_acum");
+                boolean bono = rs.getBoolean("bono_cum");
+                System.out.println("Bono: "+bono);
+                DetalleAcumulacionEntity acumulacion = new DetalleAcumulacionEntity(id, tipo, puntos, fecha, bono);
+                detalles.add(acumulacion);   
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally {
+            try {
+                if (rs != null) rs.close();
+                if (ps != null) ps.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return detalles;
     }
 }

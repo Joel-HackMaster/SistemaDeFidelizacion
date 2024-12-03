@@ -11,6 +11,12 @@ package modelos;
 public class VendedorEntity extends BaseEntity{
     Integer puntosxacum;
     Integer puntosxbon;
+    Integer puntosxcons;
+
+    public VendedorEntity() {
+    }
+
+    
 
     public VendedorEntity(Integer puntosxacum, Integer puntosxbon, Integer id, String nombres, String dni, String apellidos, String correo, String password) {
         super(id, nombres, dni, apellidos, correo, password);
@@ -23,7 +29,13 @@ public class VendedorEntity extends BaseEntity{
         this.puntosxacum = puntosxacum;
         this.puntosxbon = puntosxbon;
     }
-    
+
+    public VendedorEntity(Integer puntosxacum, Integer puntosxbon, Integer puntosxcons, int id) {
+        super(id);
+        this.puntosxacum = puntosxacum;
+        this.puntosxbon = puntosxbon;
+        this.puntosxcons = puntosxcons;
+    }
     
 
     public VendedorEntity(int id, String nombres, String apellidos) {
@@ -46,5 +58,12 @@ public class VendedorEntity extends BaseEntity{
         this.puntosxbon = puntosxbon;
     }
     
+      public Integer getPuntosxcons() {
+        return puntosxcons;
+    }
+
+    public void setPuntosxcons(Integer puntosxcons) {
+        this.puntosxcons = puntosxcons;
+    }
     
 }
