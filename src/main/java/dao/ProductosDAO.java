@@ -58,14 +58,15 @@ public class ProductosDAO {
         ResultSet rs = null;
     
     try {
-        String sql = "SELECT id, precio FROM tt_producto";  
+        String sql = "SELECT id, descripcion, precio FROM tt_producto ORDER BY id";  
         ps = connection.prepareStatement(sql);
         rs = ps.executeQuery();
         
         while (rs.next()) {
             int id = rs.getInt("id");
+            String descripcion = rs.getString("descripcion");
             float precio = rs.getFloat("precio");        
-            ProductoEntity producto = new ProductoEntity(id, precio);
+            ProductoEntity producto = new ProductoEntity(id, descripcion, precio);
             
             productos.add(producto);
         }
@@ -83,33 +84,37 @@ public class ProductosDAO {
     return productos;
 }  
     
-     public List<ProductoEntity> obtenerproductosmodelo(String modelo) {
-        
-        
+    public ProductoEntity obtenerProductosxModelo(String modelo) {
+        ProductoEntity producto = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
     
-    try {
-        String sql = "SELECT stock, descripcion, detalle, puntosxconv FROM tt_producto WHERE modelo = ?";  
-        ps = connection.prepareStatement(sql);
-        ps.setString(1, modelo);
-        rs = ps.executeQuery();
+        try {
+            String sql = "SELECT stock, precio, descripcion, detalle, puntosxconv FROM tt_producto WHERE modelo = ?";  
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, modelo);
+            rs = ps.executeQuery();
         
-        ProductoEntity productos = new ProductoEntity(rs.getString("descripcion"), rs.getString("detalle"), rs.getInt("stock"), rs.getInt("puntosxconv"));
+            String descrip = rs.getString("descripcion");
+            String detalle = rs.getString("detalle");
+            int stock = rs.getInt("Stock");
+            int puntos = rs.getInt("puntos");
+            float precio = rs.getInt("precio");
         
-    } catch (SQLException e) {
-        e.printStackTrace();
-    } finally {
+            producto = new ProductoEntity(descrip, detalle, precio, stock, puntos);
+        
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
         try {
             if (rs != null) rs.close();
             if (ps != null) ps.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.println("Prueba para git");
     }
-    return productos;
-}  
+        return producto;
+    }  
     
    public float obtenerPrecioPorId(int id) {
     float precio = 0;
@@ -147,7 +152,7 @@ public class ProductosDAO {
     ResultSet rs = null;
 
     try {
-        String sql = "SELECT descripcion, detalle, precio, stock FROM tt_producto WHERE id = ?";
+        String sql = "SELECT descripcion, detalle, precio, puntosxconv stock FROM tt_producto WHERE id = ?";
         ps = con.prepareStatement(sql);
         ps.setInt(1, id);
         rs = ps.executeQuery();
@@ -157,9 +162,8 @@ public class ProductosDAO {
             String detalle = rs.getString("detalle");
             float precio = rs.getFloat("precio");
             int stock = rs.getInt("stock");
-           
-
-            producto = new ProductoEntity(descripcion, detalle, precio, stock);
+            int puntos = rs.getInt("puntosxconv");
+            producto = new ProductoEntity(descripcion, detalle, precio, stock, puntos);
         }
     } catch (SQLException e) {
         e.printStackTrace();

@@ -44,6 +44,8 @@ public class Login extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         PassInput = new javax.swing.JTextField();
         UserInput = new javax.swing.JTextField();
+        ValCorreo = new javax.swing.JLabel();
+        ValPass = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
 
@@ -81,6 +83,10 @@ public class Login extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel4.setText("Iniciar Sesion");
 
+        ValCorreo.setForeground(new java.awt.Color(255, 51, 102));
+
+        ValPass.setForeground(new java.awt.Color(255, 51, 102));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -95,12 +101,13 @@ public class Login extends javax.swing.JFrame {
                                     .addComponent(jLabel1)
                                     .addComponent(jLabel2))
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel4)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(PassInput)
-                                        .addComponent(UserInput)
-                                        .addComponent(BotonLogin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))))
+                                    .addComponent(PassInput)
+                                    .addComponent(UserInput)
+                                    .addComponent(BotonLogin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                                    .addComponent(ValCorreo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(ValPass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(89, 89, 89)
                                 .addComponent(jLabel3)))
@@ -121,15 +128,19 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(UserInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ValCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(PassInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ValPass, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
                 .addComponent(BotonLogin)
                 .addGap(26, 26, 26)
                 .addComponent(jButton3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -171,7 +182,8 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BotonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonLoginActionPerformed
-        // TODO add your handling code here:
+        ValCorreo.setText("");
+        ValPass.setText("");
         String correo = UserInput.getText();
         String password = PassInput.getText();
         // Validar los campos antes de hacer la consulta
@@ -182,20 +194,26 @@ public class Login extends javax.swing.JFrame {
         
         Connection con = conexionController.conectar();
         
-        AdministradorDAO administradorDAO = new AdministradorDAO(con);
         
-        AdministradorEntity administrador = administradorDAO.obtenerUsuarioPorCredenciales(correo);
-        System.out.println("Clave: "+administrador.getPassword());
-        
-        if (BcryptUtil.checkPassword(password, administrador.getPassword())) {
-            JOptionPane.showMessageDialog(this, "Bienvenido " + administrador.getNombres()+" "+administrador.getApellidos());
-            // Aquí puedes abrir la siguiente ventana pasando el objeto Administrador
-            new DashboardAdmin().setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos");
-        }
         
         try {
+            AdministradorDAO administradorDAO = new AdministradorDAO(con);
+        
+            AdministradorEntity administrador = administradorDAO.obtenerUsuarioPorCredenciales(correo);
+        
+            if(administrador == null){ 
+                ValCorreo.setText("El usuario no existe");
+                return;
+            }    
+            if (BcryptUtil.checkPassword(password, administrador.getPassword())) {
+                System.out.println("Clave: "+administrador.getPassword());
+                JOptionPane.showMessageDialog(this, "Bienvenido " + administrador.getNombres()+" "+administrador.getApellidos());
+                // Aquí puedes abrir la siguiente ventana pasando el objeto Administrador
+                new DashboardAdmin().setVisible(true);
+            } else {
+                ValPass.setText("Contraseña Incorrecta");
+            }
+            
             if (con != null) con.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -241,6 +259,8 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JButton BotonLogin;
     private javax.swing.JTextField PassInput;
     private javax.swing.JTextField UserInput;
+    private javax.swing.JLabel ValCorreo;
+    private javax.swing.JLabel ValPass;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
